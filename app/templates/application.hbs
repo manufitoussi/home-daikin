@@ -1,3 +1,27 @@
-<h1>Home Daikin</h1>
+<PaperToolbar @accent=true>
+  <PaperToolbarTools>
+    <h1>
+      Home Daikin
+    </h1>
+
+    <span class="flex"></span>
+    <PaperMenu as |Menu|>
+      <Menu.trigger>
+        <PaperButton @iconButton=true>
+          <PaperIcon @icon="more_vert" />
+        </PaperButton>
+      </Menu.trigger>
+      <Menu.content as |Content|>
+        <Content.menu-item>
+          <PaperIcon @icon="local_phone" /><span>Phone</span>
+        </Content.menu-item>
+      </Menu.content>
+    </PaperMenu>
+   
+  </PaperToolbarTools>
+</PaperToolbar>
+
+
+
 
 {{outlet}}
