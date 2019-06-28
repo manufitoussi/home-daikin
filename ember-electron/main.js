@@ -2,6 +2,7 @@
 const { app, BrowserWindow, protocol } = require('electron');
 const { dirname, join, resolve } = require('path');
 const protocolServe = require('electron-protocol-serve');
+const daikin = require('./data-layer/daikin');
 
 let mainWindow = null;
 
@@ -33,6 +34,8 @@ app.on('ready', () => {
     width: 800,
     height: 600,
   });
+
+  mainWindow.daikin = daikin;
 
   // If you want to open up dev tools programmatically, call
   // mainWindow.openDevTools();
