@@ -1,0 +1,146 @@
+<PaperCard @class={{@class}} as |Card|>
+  <Card.title as |Title|>
+    <Title.text as |Text|>
+      <Text.headline>{{@title}}  </Text.headline> 
+    </Title.text>
+  </Card.title>
+  <Card.content>
+
+      <h1 class="layout-row">
+        <span class="flex">
+          <i class="fas fa-thermometer-quarter"></i> {{this.sensorInfo.htemp}}°C
+        </span>
+      </h1>
+      <div class="layout-row">
+
+        <div class="flex" style="white-space: nowrap;">
+          <PaperSwitch @value={{this.isOn}}
+                      @onChange={{action this.toggleOnOff}}>
+            {{#if this.isOn}}
+              <span style="color: green;">ON</span>
+            {{else}}
+              <span style="color: inherit;">OFF</span>
+            {{/if}}           
+          </PaperSwitch>
+        </div>
+
+        <PaperButton @class="flex" @onClick={{action this.showDialog "temp"}}>
+          <span style="color: {{if this.isOn "inherit" "#eee"}}; white-space: nowrap;"><i class="fas fa-hand-point-right"></i> {{this.controlInfo.stemp}}°C</span>
+        </PaperButton>
+
+        <PaperButton @class="flex" @onClick={{action this.showDialog "air"}}>
+          <span style="white-space: nowrap;">
+            <i class="fas fa-wind" style="color: {{if this.isOn "#444" "#eee"}};" ></i>
+            <Air @f_rate={{this.controlInfo.f_rate}} @color={{if this.isOn "#444" "#eee"}} />
+          </span>
+        </PaperButton>
+
+        <PaperButton @class="flex" @onClick={{action this.showDialog "dir"}}>
+          <span style="white-space: nowrap;">
+            <i class="fas fa-arrows-alt" style="color: {{if this.isOn "#444" "#eee"}};" ></i>
+            <Dir @f_dir={{this.controlInfo.f_dir}} @color={{if this.isOn "#444" "#eee"}} />
+          </span>
+        </PaperButton>
+
+      </div>
+      {{!-- {{#each-in this.sensorInfo as |key value|}}
+        <div>{{key}} : {{value}}</div>
+      {{/each-in}} --}}
+      {{!-- {{#each-in this.controlInfo as |key value|}}
+        <div>{{key}} : {{value}}</div>
+      {{/each-in}}  --}}
+    
+  </Card.content>
+</PaperCard>
+{{#if this.isDialogShown}}
+
+  <PaperDialog @fullscreen={{false}}>
+    <PaperToolbar>
+      <PaperToolbarTools>
+        {{@title}}
+        <span style="padding-left: 2vmin; display: inline-block; width: 7em;">
+          {{#if isTempDialogShown}}
+            <i class="fas fa-hand-point-right"></i> {{this.tempConsign}}°C
+          {{/if}}
+          {{#if isAirDialogShown}}
+            <i class="fas fa-wind"></i>
+          {{/if}}
+          {{#if isDirDialogShown}}
+            <i class="fas fa-arrows-alt"></i>
+          {{/if}}
+        </span>
+        <span class="flex"></span>
+        <PaperButton @iconButton={{true}} @onClick={{action this.hideDialog}}>
+          <PaperIcon @icon="close" />
+        </PaperButton> 
+      </PaperToolbarTools>
+    </PaperToolbar>
+    <PaperDialogContent>
+      {{#if isTempDialogShown}}
+        <PaperSlider @class="flex" 
+                     @discrete={{true}}
+                     @step="0.5"
+                     @value={{this.tempConsign}} 
+                     @min="18"
+                     @max="32"
+                     @onChange={{action (mut this.tempConsign)}} />
+      {{/if}}
+
+      {{#if isAirDialogShown}}
+        <PaperRadioGroup @groupValue={{this.airConsign}}
+                         @onChange={{action (mut this.airConsign)}} as |Group|>
+          <Group.radio @value="A">
+            <Air @f_rate="A" />
+          </Group.radio>
+          <Group.radio @value="B">
+            <Air @f_rate="B" />
+          </Group.radio>
+          <Group.radio @value="3">
+            <Air @f_rate="3" />
+          </Group.radio>
+          <Group.radio @value="4">
+            <Air @f_rate="4" />
+          </Group.radio>
+          <Group.radio @value="5">
+            <Air @f_rate="5" />
+          </Group.radio>
+          <Group.radio @value="6">
+            <Air @f_rate="6" />
+          </Group.radio>
+          <Group.radio @value="7">
+            <Air @f_rate="7" />
+          </Group.radio>
+        </PaperRadioGroup>
+      {{/if}}
+
+      {{#if isDirDialogShown}}
+        <PaperRadioGroup @groupValue={{this.dirConsign}}
+                         @onChange={{action (mut this.dirConsign)}} as |Group|>
+          <Group.radio @value="0">
+            <Dir @f_dir="0" />
+          </Group.radio>
+          <Group.radio @value="1">
+            <Dir @f_dir="1" />
+          </Group.radio>
+          <Group.radio @value="2">
+            <Dir @f_dir="2" />
+          </Group.radio>
+          <Group.radio @value="3">
+            <Dir @f_dir="3" />
+          </Group.radio>
+        </PaperRadioGroup>
+      {{/if}}
+    </PaperDialogContent>
+    <PaperDialogActions @class="layout-row">
+      <span class="flex"></span>
+      <PaperButton  @onClick={{action this.hideDialog}}>
+        Annuler
+      </PaperButton> 
+      <PaperButton  @onClick={{action this.hideDialog "ok"}}>
+        OK
+      </PaperButton> 
+
+    </PaperDialogActions>
+  </PaperDialog>
+
+{{/if}}

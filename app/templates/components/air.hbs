@@ -1,0 +1,21 @@
+{{#if (eq this.rate "A")}}
+  auto
+{{else if (eq this.rate "B")}}
+  <i class="fas fa-moon" style="color: {{this.color}};"></i>
+{{else}}
+  {{#if (gt this.force 0) }}
+    <span style="display: inline-block; width: 0.3em; height:0.2em; background-color: {{this.color}};"></span>
+  {{/if}}
+  {{#if (gt this.force 1) }}
+    <span style="display: inline-block; width: 0.3em; height:0.4em; background-color: {{this.color}};"></span>
+  {{/if}}
+  {{#if (gt this.force 2) }}
+    <span style="display: inline-block; width: 0.3em; height:0.6em; background-color: {{this.color}};"></span>
+  {{/if}}
+  {{#if (gt this.force 3) }}
+    <span style="display: inline-block; width: 0.3em; height:0.8em; background-color: {{this.color}};"></span>
+  {{/if}}
+  {{#if (gt this.force 4) }}
+    <span style="display: inline-block; width: 0.3em; height:1.0em; background-color: {{this.color}};"></span>
+  {{/if}}
+{{/if}}

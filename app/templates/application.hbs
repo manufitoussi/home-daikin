@@ -1,13 +1,17 @@
-<PaperToolbar @accent=true>
+<PaperToolbar @accent={{true}}>
   <PaperToolbarTools>
     <h1>
-      Home Daikin
+      Bibou Home
     </h1>
 
     <span class="flex"></span>
+    <div>
+      <Loadable /> Exterieur <i class="fas fa-thermometer-quarter"></i> {{this.model.sensorInfos.parents.otemp}}°C
+      
+    </div>
     <PaperMenu as |Menu|>
       <Menu.trigger>
-        <PaperButton @iconButton=true>
+        <PaperButton @iconButton={{true}}>
           <PaperIcon @icon="more_vert" />
         </PaperButton>
       </Menu.trigger>
@@ -21,7 +25,14 @@
   </PaperToolbarTools>
 </PaperToolbar>
 
-
+<div class="layout-row layout-xs-column">
+  <Room @roomName="salon" @class="flex" @title="Salon" @data={{this.model}} />
+  <Room @roomName="parents" @class="flex" @title="Chambre Parents" @data={{this.model}} />
+</div>
+<div class="layout-row layout-xs-column">
+  <Room @roomName="jeanne" @class="flex" @title="Chambre Jeanne" @data={{this.model}} />
+  <Room @roomName="elina" @class="flex" @title="Chambre Elina" @data={{this.model}} />
+</div>
 
 
 {{outlet}}

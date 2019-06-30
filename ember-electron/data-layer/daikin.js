@@ -70,14 +70,14 @@ const getControlInfo = name => {
 }
 
 const setControlInfo = (name, request) => {
-  console.log('request:', request);
+  console.log('setControlInfo:', name, request);
   return fetch(`http://${DEVICES[name]}/aircon/set_control_info?${request}`)
     .then(result => result.text())
     .then(parseControlInfo);
 }
 
 module.exports = {
-  getBasicInfo() {
+  getBasicInfo(...names) {
     if (names.length === 0) {
       names = Object.keys(DEVICES);
     }

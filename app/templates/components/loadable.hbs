@@ -1,0 +1,8 @@
+<div style="display: inline-block;">
+  {{#if this.isLoading}}
+    <PaperIcon @icon="rotate-right" @spin="true" />
+  {{else}}
+    {{yield}}
+  {{/if}}
+</div>
+
