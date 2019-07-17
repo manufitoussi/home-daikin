@@ -17,7 +17,7 @@
         <PaperSwitch @value={{this.isOn}}
                     @onChange={{action this.toggleOnOff}}>
           {{#if this.isOn}}
-            <span style="color: green;">ON</span>
+            <span style="color: rgb(79, 132, 248);">ON</span>
           {{else}}
             <span style="color: inherit;">OFF</span>
           {{/if}}           
@@ -57,7 +57,7 @@
 {{#if this.isDialogShown}}
 
   <PaperDialog @fullscreen={{false}}>
-    <PaperToolbar>
+    <PaperToolbar @accent={{true}}>
       <PaperToolbarTools>
         {{@title}}
         <span style="padding-left: 2vmin; display: inline-block; width: 7em;">
