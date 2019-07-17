@@ -1,5 +1,6 @@
 /* eslint-env node */
 const { app, BrowserWindow, protocol } = require('electron');
+const electron = require('electron');
 const { dirname, join, resolve } = require('path');
 const protocolServe = require('electron-protocol-serve');
 const daikin = require('./data-layer/daikin');
@@ -30,9 +31,14 @@ app.on('window-all-closed', () => {
 });
 
 app.on('ready', () => {
+
+  const electronScreen = electron.screen;
+  const size = electronScreen.getPrimaryDisplay().workAreaSize;
+
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: size.width*1/2,
+    height: size.height*2/3,
+    icon: __dirname + '/icon-64x64.ico'
   });
 
   mainWindow.daikin = daikin;
