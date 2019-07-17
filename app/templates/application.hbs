@@ -1,38 +1,42 @@
-<PaperToolbar @accent={{true}}>
-  <PaperToolbarTools>
-    <h1>
-      Bibou Home
-    </h1>
+<div class="layout-fill">
+  <PaperToolbar @accent={{true}}>
+    <PaperToolbarTools>
+      <h1>
+        Bibou Home
+      </h1>
 
-    <span class="flex"></span>
-    <div>
-      <Loadable /> Exterieur <i class="fas fa-thermometer-quarter"></i> {{this.model.sensorInfos.parents.otemp}}°C
-      
+      <span class="flex"></span>
+      <div>
+        <Loadable /> Exterieur <i class="fas fa-thermometer-quarter"></i> {{this.model.sensorInfos.parents.otemp}}°C
+        
+      </div>
+      <PaperMenu as |Menu|>
+        <Menu.trigger>
+          <PaperButton @iconButton={{true}}>
+            <PaperIcon @icon="more_vert" />
+          </PaperButton>
+        </Menu.trigger>
+        <Menu.content as |Content|>
+          <Content.menu-item>
+            <PaperIcon @icon="local_phone" /><span>Phone</span>
+          </Content.menu-item>
+        </Menu.content>
+      </PaperMenu>
+    
+    </PaperToolbarTools>
+  </PaperToolbar>
+
+  <div class="layout-fill main">
+    <div class="layout-row layout-xs-column">
+      <Room @roomName="salon" @class="flex" @title="Salon" @data={{this.model}} />
+      <Room @roomName="parents" @class="flex" @title="Chambre Parents" @data={{this.model}} />
     </div>
-    <PaperMenu as |Menu|>
-      <Menu.trigger>
-        <PaperButton @iconButton={{true}}>
-          <PaperIcon @icon="more_vert" />
-        </PaperButton>
-      </Menu.trigger>
-      <Menu.content as |Content|>
-        <Content.menu-item>
-          <PaperIcon @icon="local_phone" /><span>Phone</span>
-        </Content.menu-item>
-      </Menu.content>
-    </PaperMenu>
-   
-  </PaperToolbarTools>
-</PaperToolbar>
+    <div class="layout-row layout-xs-column">
+      <Room @roomName="jeanne" @class="flex" @title="Chambre Jeanne" @data={{this.model}} />
+      <Room @roomName="elina" @class="flex" @title="Chambre Elina" @data={{this.model}} />
+    </div>
 
-<div class="layout-row layout-xs-column">
-  <Room @roomName="salon" @class="flex" @title="Salon" @data={{this.model}} />
-  <Room @roomName="parents" @class="flex" @title="Chambre Parents" @data={{this.model}} />
+
+    {{outlet}}
+  </div>
 </div>
-<div class="layout-row layout-xs-column">
-  <Room @roomName="jeanne" @class="flex" @title="Chambre Jeanne" @data={{this.model}} />
-  <Room @roomName="elina" @class="flex" @title="Chambre Elina" @data={{this.model}} />
-</div>
-
-
-{{outlet}}

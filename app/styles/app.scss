@@ -3,3 +3,17 @@ $accent: "green";
 $warn: "pink";
 
 @import 'ember-paper';
+
+body.fixed {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.main {
+  overflow: hidden;
+  overflow-y: auto;
+}
