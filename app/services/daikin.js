@@ -18,6 +18,8 @@ export default class DaikinService extends Service {
 
   @tracked isLoading = false;
 
+  @tracked error = null;
+
   _timeout = null;
 
   async startSynchro() {
@@ -34,8 +36,14 @@ export default class DaikinService extends Service {
 
   async update() {
     this.isLoading = true;
-    await this.getAll();
-    this.isLoading = false;
+    try {
+      await this.getAll();
+    } catch(e) {
+      this.error = e;
+    } finally {
+      this.isLoading = false;
+    }
+    
     return this.data;
   }
 
