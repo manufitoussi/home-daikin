@@ -17,3 +17,20 @@ body.fixed {
   overflow: hidden;
   overflow-y: auto;
 }
+
+.splashscreen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  z-index: -1;
+
+  img {
+    margin: auto;
+    height: 512px;
+  }
+}
+
+.application {
+  background-color: rgba(255,255,255,0.8);
+}
