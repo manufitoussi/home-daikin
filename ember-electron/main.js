@@ -1,6 +1,6 @@
 /* eslint-env node */
 const { app, BrowserWindow, protocol } = require('electron');
-const electron = require('electron');
+// const electron = require('electron');
 const { dirname, join, resolve } = require('path');
 const protocolServe = require('electron-protocol-serve');
 const daikin = require('./data-layer/daikin');
@@ -32,12 +32,13 @@ app.on('window-all-closed', () => {
 
 app.on('ready', () => {
 
-  const electronScreen = electron.screen;
-  const size = electronScreen.getPrimaryDisplay().workAreaSize;
+  // const electronScreen = electron.screen;
+  // const size = electronScreen.getPrimaryDisplay().workAreaSize;
 
   mainWindow = new BrowserWindow({
-    width: size.width*1/2,
-    height: size.height*2/3,
+    width: 800, //size.width*1/2,
+    height: 700,//size.height*2/3,
+    title: 'Climatisation BibouHome',
     icon: __dirname + '/icon-64x64.ico'
   });
 

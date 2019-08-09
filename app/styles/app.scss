@@ -34,3 +34,51 @@ body.fixed {
 .application {
   background-color: rgba(255,255,255,0.8);
 }
+
+.room {
+
+  background-color: rgba(255,255,255,0.7);
+
+  .button-content {
+    white-space: nowrap;
+    opacity: 0.3;
+  }
+
+  .picture {
+    img {
+      height: 2.9em;
+      width: 2.9em;
+      border-radius: 50%;
+    }
+
+    filter: grayscale(1);
+  }
+
+  &.is-off  {
+    md-card-title {
+      background-color: #888;
+      color: white;
+    }
+  }
+
+
+  &.is-on {
+
+    .picture {
+      filter: grayscale(0);
+    }
+
+    md-card-title {
+      color: white;
+      background-color: #2196f3;
+    }
+
+    .switch-caption {
+      color: #2196f3;
+    }
+
+    .button-content {
+      opacity: 1;
+    }
+  }
+}

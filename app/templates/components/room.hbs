@@ -1,15 +1,16 @@
-<PaperCard @class={{@class}} as |Card|>
+<PaperCard class="room flex {{if this.isOn 'is-on' 'is-off'}}" as |Card|>
   <Card.title as |Title|>
     <Title.text as |Text|>
-      <Text.headline>{{@title}}  </Text.headline> 
+      <Text.headline class="layout-row"><span class="flex"> <i class="fas fa-snowflake"></i><i class="fas fa-thermometer-half"></i> {{@title}}</span></Text.headline> 
     </Title.text>
   </Card.title>
   <Card.content>
 
-    <h1 class="layout-row">
+    <h1 class="layout-row layout-align-start-center">
       <span class="flex">
-        <i class="fas fa-thermometer-quarter"></i> {{this.sensorInfo.htemp}}°C
+        <i class="fas fa-thermometer-half"></i> {{this.sensorInfo.htemp}}°C
       </span>
+      <span class="picture"><img src="./{{@pictureName}}.png" ></span>
     </h1>
     <div class="layout-row">
 
@@ -17,28 +18,28 @@
         <PaperSwitch @value={{this.isOn}}
                     @onChange={{action this.toggleOnOff}}>
           {{#if this.isOn}}
-            <span style="color: rgb(79, 132, 248);">ON</span>
+            <span class="switch-caption">ON</span>
           {{else}}
-            <span style="color: inherit;">OFF</span>
+            <span class="switch-caption">OFF</span>
           {{/if}}           
         </PaperSwitch>
       </div>
 
       <PaperButton @class="flex" @onClick={{action this.showDialog "temp"}}>
-        <span style="color: {{if this.isOn "inherit" "#eee"}}; white-space: nowrap;"><i class="fas fa-hand-point-right"></i> {{this.controlInfo.stemp}}°C</span>
+        <span class="button-content"><i class="fas fa-hand-point-right"></i> {{this.controlInfo.stemp}}°C</span>
       </PaperButton>
 
       <PaperButton @class="flex" @onClick={{action this.showDialog "air"}}>
-        <span style="white-space: nowrap;">
-          <i class="fas fa-wind" style="color: {{if this.isOn "#444" "#eee"}};" ></i>
-          <Air @f_rate={{this.controlInfo.f_rate}} @color={{if this.isOn "#444" "#eee"}} />
+        <span class="button-content">
+          <i class="fas fa-wind" ></i>
+          <Air @f_rate={{this.controlInfo.f_rate}} @color="#444" />
         </span>
       </PaperButton>
 
       <PaperButton @class="flex" @onClick={{action this.showDialog "dir"}}>
-        <span style="white-space: nowrap;">
-          <i class="fas fa-arrows-alt" style="color: {{if this.isOn "#444" "#eee"}};" ></i>
-          <Dir @f_dir={{this.controlInfo.f_dir}} @color={{if this.isOn "#444" "#eee"}} />
+        <span class="button-content">
+          <i class="fas fa-arrows-alt"></i>
+          <Dir @f_dir={{this.controlInfo.f_dir}} @color="#444" />
         </span>
       </PaperButton>
 
