@@ -45,6 +45,7 @@ export default class RoomComponent extends Component {
   toggleOnOff() {
     var controls = this.daikin.controlInfoToSet(this.controlInfo);
     controls.pow = controls.pow === "1" ? "0" : "1";
+    this.controlInfo.pow = controls.pow;
     this.daikin.setControlInfo(this.args.roomName, controls);
   }
 
@@ -67,7 +68,6 @@ export default class RoomComponent extends Component {
       controls.stemp = this.tempConsign;
       controls.f_rate = this.airConsign;
       controls.f_dir = this.dirConsign;
-      console.log(controls);
       this.daikin.setControlInfo(this.args.roomName, controls);
     }
   }
