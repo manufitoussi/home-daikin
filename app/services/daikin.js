@@ -5,6 +5,8 @@ const currentWindow = remote.getCurrentWindow();
 import { hash } from 'rsvp';
 import { tracked } from '@glimmer/tracking';
 
+const DELAY = 20; // s
+
 class Data {
   @tracked basicInfos = {};
   @tracked sensorInfos = {};
@@ -15,6 +17,8 @@ export default class DaikinService extends Service {
   daikin = currentWindow.daikin;
 
   data = new Data();
+
+  historics = [];
 
   @tracked isLoading = false;
 
@@ -50,7 +54,7 @@ export default class DaikinService extends Service {
   async synchro() {
     await this.update();
     this.stopSynchro();
-    this._timeout = setTimeout(this.synchro.bind(this), 20000);
+    this._timeout = setTimeout(this.synchro.bind(this), DELAY*1000);
     return this.data;
   }
 
@@ -83,11 +87,21 @@ export default class DaikinService extends Service {
   }
 
   async getAll() {
-    return await hash({
+    var data = await hash({
       basicInfos: this._getBasicInfo(),
       sensorInfos: this._getSensorInfo(),
       controlInfos: this._getControlInfo()
     });
+    this.historize(data);
+    return data;
+  }
+
+  historize(data) {
+    this.historics.push({ dt: new Date(), data });
+    const max = 24*60*60 / DELAY;
+    while(this.historics.length > max) {
+      this.historics.pop();
+    }
   }
 
   async setControlInfo(roomName, controls) {
