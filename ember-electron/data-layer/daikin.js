@@ -1,5 +1,7 @@
 const fetch = require('node-fetch');
 const { hash, resolve } = require('rsvp');
+const Store = require('electron-store');
+
 const parseResponse = txt => {
   const keyValueTexts = txt.split(',');
 
@@ -44,11 +46,22 @@ const parseControlInfo = txt => {
   return obj;
 };
 
+const store = new Store({
+  defaults: {
+    devices: {
+      salon: '192.168.1.29',
+      elina: '192.168.1.23',
+      parents: '192.168.1.41',
+      jeanne: '192.168.1.37'
+    }
+  }
+});
+
 const DEVICES = {
-  salon: '192.168.1.29',
-  elina: '192.168.1.23',
-  parents: '192.168.1.41',
-  jeanne: '192.168.1.37'
+  salon: store.get('devices.salon'),
+  elina: store.get('devices.elina'),
+  parents: store.get('devices.parents'),
+  jeanne: store.get('devices.jeanne')
 };
 
 const getBasicInfo = name => {

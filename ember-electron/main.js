@@ -37,7 +37,7 @@ app.on('ready', () => {
 
   mainWindow = new BrowserWindow({
     width: 800, //size.width*1/2,
-    height: 700,//size.height*2/3,
+    height: 710,//size.height*2/3,
     title: 'Climatisation BibouHome',
     icon: __dirname + '/icon-64x64.ico'
   });
